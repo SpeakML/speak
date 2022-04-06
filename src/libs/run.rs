@@ -1,5 +1,11 @@
 use crate::{chk::*, DEFAULT_MEMORY};
 
+macro_rules! runalgo {
+	($MChunk: expr, $IChunk: expr, $VChunk: expr) => {
+		$MChunk.iter().sum::<f32>() - $IChunk.iter().sum::<u16>() as f32 / $VChunk.iter().sum::<u16>() as f32;
+	};
+}
+
 pub fn run(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory: Option<usize>) {
 	match memory {
 		Some(x) => __run__(rawinput, learnt, x),
@@ -27,6 +33,9 @@ pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory:
 
 	let mut Calculation: f32;
 
+
+
+
 	for IChunk in input.into_chunks(memory).base {
 		for Value in &TValuesVec {
 			checkmem!(memory, Value, VRealMem);
@@ -35,7 +44,13 @@ pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory:
 					checkmem!(memory, MegaVec, MRealMem);
 					for MChunk in MegaVec.into_chunks(MRealMem).base {
 						// * Calculating the result
-						Calculation = MChunk.iter().sum::<f32>() - IChunk.iter().sum::<u16>() as f32 / VChunk.iter().sum::<u16>() as f32;
+						Calculation = runalgo!(MChunk, IChunk, VChunk);
+
+						if Calculation < (
+							// runalgo!(...)
+						) {
+
+						}
 					}
 				};
 			};
