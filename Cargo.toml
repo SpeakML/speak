@@ -10,7 +10,6 @@ description = "A minimal, fast, machine-learning based chatbot"
 publish = false
 
 [dependencies]
-aquamarine = "0.1.11"
 
 [package.metadata.docs.rs]
 rustdoc-args = [ "--html-in-header", "./extra/docs/katex-header.html" ]
