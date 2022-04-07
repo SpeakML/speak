@@ -29,6 +29,9 @@ pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory:
 	let TValuesVec = learnt.0;
 	let Mega = learnt.1;
 
+	let IRM: usize;
+	checkmem!(memory, input, IRM);
+
 	// * Declaring the variables
 	let mut VRealMem: usize;
 	let mut MRealMem: usize;
@@ -36,40 +39,7 @@ pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory:
 	let mut Calculation: f32;
 
 	let mut BestMatch: Option<(usize, usize, usize, f32)> = None;
-	/*
-	Best Match = (
-		Value Index,
-		Mega Index,
-		Mega Chunk Index,
-		Best Calculation at that point
-	)
-	*/
-
-	// for IChunk in input.into_chunks(memory).base {
-	// 	for Value in &TValuesVec {
-	// 		checkmem!(memory, Value, VRealMem);
-	// 		for (i, VChunk) in Value.into_chunks(memory).base.iter().enumerate() {
-	// 			for (j, MegaVec) in Mega.iter().enumerate() {
-	// 				checkmem!(memory, MegaVec, MRealMem);
-	// 				for (k, &MChunk) in MegaVec.into_chunks(MRealMem).base.iter().enumerate() {
-	// 					// * Calculating the result
-	// 					Calculation = diffcomparison!(MChunk, IChunk, VChunk);
-
-	// 					if Calculation <= threshold {
-	// 						// Check if BestMatch is None
-	// 						if BestMatch == None {
-	// 							BestMatch = Some((i, j, k, Calculation));
-	// 						} else {
-	// 							if Calculation < BestMatch.unwrap().3 {
-	// 								BestMatch = Some((i, j, k, Calculation));
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			};
-	// 		};
-	// 	};
-	// }
-
-	// Actually I messed up with the algorithm hehe
+	for IChunk in input.into_chunks(memory).base {
+		
+	}
 }
