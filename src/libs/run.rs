@@ -40,6 +40,6 @@ pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory:
 
 	let mut BestMatch: Option<(usize, usize, usize, f32)> = None;
 	for IChunk in input.into_chunks(memory).base {
-		
+		for VChunk in 
 	}
 }
