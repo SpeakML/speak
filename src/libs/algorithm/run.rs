@@ -1,3 +1,9 @@
+//
+// ────────────────────────────────────────────── I ──────────
+//   :::::: R U N : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────
+//
+
 use crate::{chk::*, DEFAULT_MEMORY, DEFAULT_THRESHOLD};
 
 macro_rules! diffcomparison {
@@ -38,8 +44,5 @@ pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory:
 
 	let mut Calculation: f32;
 
-	let mut BestMatch: Option<(usize, usize, usize, f32)> = None;
-	for IChunk in input.into_chunks(memory).base {
-		for VChunk in 
-	}
+	/* Algorithm here */
 }
