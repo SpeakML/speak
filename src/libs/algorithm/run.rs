@@ -21,7 +21,7 @@ macro_rules! diffcomparison {
 // 	};
 // }
 
-pub fn __run__(rawinput: String, learnt: (Map::<u16>, Vec<Vec<f32>>), memory: usize, threshold: f32) {
+pub fn __run__(rawinput: String, learnt: (Map::<Vec<u16>>, Vec<Vec<f32>>), memory: usize, threshold: f32) {
 	// * Input translation
 	let mut input: Vec<u16> = Vec::new();
 
@@ -46,12 +46,22 @@ pub fn __run__(rawinput: String, learnt: (Map::<u16>, Vec<Vec<f32>>), memory: us
 	// )
 
 	let IRM :usize;
+	let mut KRM :usize;
+	let mut VRM :usize;
+
+
+
 
 	checkmem!(memory, input, IRM);
 
 	for IChunk in input.into_chunks(IRM).base {
 		for (key, value) in TMap.iter() {
-			
+			checkmem!(memory, key, KRM, value, VRM);
+			for KChunk in key.into_chunks(KRM).base {
+				for VChunk in value.into_chunks(VRM).base {
+					// Main algorithm here
+				}
+			}
 		}
 	}
 
