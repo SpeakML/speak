@@ -4,7 +4,7 @@
 // ────────────────────────────────────────────────────────
 //
 
-use crate::{chk::*, DEFAULT_MEMORY, DEFAULT_THRESHOLD};
+use crate::*;
 
 macro_rules! diffcomparison {
 	($MChunk: expr, $IChunk: expr, $VChunk: expr) => {

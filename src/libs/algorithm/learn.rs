@@ -52,15 +52,15 @@ use crate::*;
 pub fn learn<T: Literal<String> + Clone + ToString>(
 	data: &std::collections::HashMap<T, T>,
 	memory: Option<usize>,
-) -> (Vec<Vec<f32>>, Map<Vec<u16>>, Map<String>) {
+) -> Vec<f32> {
 	let x: Map<T> = data.clone().to_map();
 	let new_map: Map<String> = Map::<String> {
 		keys: x.keys.literal(),
 		values: x.values.literal(),
 	};
 
-	print!("{:?}", new_map.keys);
-	print!("{:?}", new_map.values);
+	// print!("{:?}", new_map.keys);
+	// print!("{:?}", new_map.values);
 
 	if let Some(mem) = memory {
 		return __learn__(new_map, mem);
@@ -70,6 +70,27 @@ pub fn learn<T: Literal<String> + Clone + ToString>(
 }
 
 // The main algorithm
-fn __learn__<'a>(rawdata: Map<String>, memory: usize) -> (Vec<Vec<f32>>, Map<Vec<u16>>, Map<String>) {
-	/* Algorithm here! */
+fn __learn__<'a>(rawdata: Map<String>, memory: usize) -> Vec<f32> {
+
+	let mut mega: Vec<f32> = Vec::new();
+
+	let mut vrm: usize;
+	let mut krm: usize;
+	
+	// Now, we convert the rawdata to a translated data
+	let data: Map<Vec<u16>> = Map::<Vec<u16>> {
+		keys: translate(&rawdata.keys),
+		values: translate(&rawdata.values),
+	};
+
+	// Now, we crate the relations between the values
+	for (key, value) in data.keys.iter().zip(data.values.iter()) {
+		checkmem!(memory, key, krm, value, vrm);
+		for KChunk in key.into_chunks(krm).base {
+			for VChunk in value.into_chunks(vrm).base {
+				mega.push(KChunk.iter().sum::<u16>() as f32 / VChunk.iter().sum::<u16>() as f32);
+			}
+		}
+	}
+	return mega;
 }
