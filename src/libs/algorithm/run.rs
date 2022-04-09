@@ -44,5 +44,6 @@ pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory:
 
 	let mut Calculation: f32;
 
-	/* Algorithm here */
+	let mut VChunk: Vec<u16>;
+	let mut MChunk: Vec<f32>;
 }
