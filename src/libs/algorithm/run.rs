@@ -12,16 +12,16 @@ macro_rules! diffcomparison {
 	};
 }
 
-pub fn run(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory: Option<usize>, threshold: Option<f32>) {
-	match (memory, threshold) {
-		(None, None) => __run__(rawinput, learnt, DEFAULT_MEMORY, DEFAULT_THRESHOLD),
-		(Some(mem), None) => __run__(rawinput, learnt, mem, DEFAULT_THRESHOLD),
-		(None, Some(thr)) => __run__(rawinput, learnt, DEFAULT_MEMORY, thr),
-		(Some(mem), Some(thr)) => __run__(rawinput, learnt, mem, thr)
-	};
-}
+// pub fn run(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory: Option<usize>, threshold: Option<f32>) {
+// 	match (memory, threshold) {
+// 		(None, None) => __run__(rawinput, learnt, DEFAULT_MEMORY, DEFAULT_THRESHOLD),
+// 		(Some(mem), None) => __run__(rawinput, learnt, mem, DEFAULT_THRESHOLD),
+// 		(None, Some(thr)) => __run__(rawinput, learnt, DEFAULT_MEMORY, thr),
+// 		(Some(mem), Some(thr)) => __run__(rawinput, learnt, mem, thr)
+// 	};
+// }
 
-pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory: usize, threshold: f32) {
+pub fn __run__(rawinput: String, learnt: (Map::<u16>, Vec<Vec<f32>>), memory: usize, threshold: f32) {
 	// * Input translation
 	let mut input: Vec<u16> = Vec::new();
 
@@ -32,18 +32,27 @@ pub fn __run__(rawinput: String, learnt: (Vec<Vec<u16>>, Vec<Vec<f32>>), memory:
 	};
 
 	// Let's alias some things
-	let TValuesVec = learnt.0;
+	let TMap = learnt.0;
 	let Mega = learnt.1;
 
-	let IRM: usize;
+	// Algorithm fixed (Being
+	
+		// O(#C(n) * #C(m))
+	
+	// instead of
+	
+	// O( sum_{i <= #V} #C(K_i)^#C(V) )
+	
+	// )
+
+	let IRM :usize;
+
 	checkmem!(memory, input, IRM);
 
-	// * Declaring the variables
-	let mut VRealMem: usize;
-	let mut MRealMem: usize;
+	for IChunk in input.into_chunks(IRM).base {
+		for (key, value) in TMap.iter() {
+			
+		}
+	}
 
-	let mut Calculation: f32;
-
-	let mut VChunk: Vec<u16>;
-	let mut MChunk: Vec<f32>;
 }

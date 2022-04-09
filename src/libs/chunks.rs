@@ -14,18 +14,6 @@ impl<'a, T> Chunks<'a, T> {
     }
 }
 
-impl<'a> Chunks<'a, u16> {
-    pub(crate) fn sum(&self) -> u16 {
-        let mut sum: u16 = 0;
-        for &x in &self.base {
-            for &i in x {
-                sum += i;
-            }
-        }
-        return sum;
-    }
-}
-
 pub(crate) trait Chunkable<'a, T> {
     fn into_chunks(&'a self, memory: usize) -> Chunks<'a, T>;
 }

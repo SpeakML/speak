@@ -5,6 +5,12 @@ pub struct Map<T> {
 	pub(crate) values: Vec<T>
 }
 
+impl<T> Map<T> {
+	pub fn iter(&self) -> impl Iterator<Item = (&T, &T)> {
+		self.keys.iter().zip(self.values.iter())
+	}
+}
+
 pub trait ToMap<T> {
 	fn to_map(self) -> Map<T>;
 }
