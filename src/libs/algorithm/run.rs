@@ -48,18 +48,19 @@ pub fn __run__(rawinput: String, learnt: (Map::<Vec<u16>>, Vec<Vec<f32>>), memor
 	let IRM :usize;
 	let mut KRM :usize;
 	let mut VRM :usize;
-
-
+	let mut MRM :usize;
 
 
 	checkmem!(memory, input, IRM);
 
 	for IChunk in input.into_chunks(IRM).base {
-		for (key, value) in TMap.iter() {
-			checkmem!(memory, key, KRM, value, VRM);
+		for (i, (key, value)) in TMap.iter().enumerate() {
+			checkmem!(memory, key, KRM, value, VRM, Mega[i], MRM);
 			for KChunk in key.into_chunks(KRM).base {
 				for VChunk in value.into_chunks(VRM).base {
-					// Main algorithm here
+					for MChunk in Mega[i].into_chunks(MRM).base {
+
+					}
 				}
 			}
 		}

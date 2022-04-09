@@ -91,7 +91,7 @@ fn translate(vec: &Vec<String>) -> Vec<Vec<u16>> {
 // }
 
 macro_rules! checkmem {
-	($mem: expr, $($key: ident, $keyname: ident),*) => {
+	($mem: expr, $($key: expr, $keyname: ident),*) => {
 		$(
 			$keyname = if $mem > $key.len() {
 				$key.len()
