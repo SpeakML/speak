@@ -50,20 +50,54 @@ pub fn __run__(rawinput: String, learnt: (Map::<Vec<u16>>, Vec<Vec<f32>>), memor
 	let mut VRM :usize;
 	let mut MRM :usize;
 
+	let mut UBM :(usize, usize, usize, usize);
+
+	let mut KeyChunks: Chunks<u16>;
+	let mut ValueChunks: Chunks<u16>;
+
+	let mut BestMatch: Option
+	<(
+	
+		usize,
+		usize,
+		usize,
+		usize
+		
+	)> = None;
+
+	let mut BMCalculation;
+	let mut Calculation: f32;
 
 	checkmem!(memory, input, IRM);
 
 	for IChunk in input.into_chunks(IRM).base {
 		for (i, (key, value)) in TMap.iter().enumerate() {
 			checkmem!(memory, key, KRM, value, VRM, Mega[i], MRM);
-			for KChunk in key.into_chunks(KRM).base {
-				for VChunk in value.into_chunks(VRM).base {
-					for MChunk in Mega[i].into_chunks(MRM).base {
+			KeyChunks = key.into_chunks(KRM);
+			ValueChunks = value.into_chunks(VRM);
+			for (ki, KChunk) in KeyChunks.base.iter().enumerate() {
+				for (vi, VChunk) in ValueChunks.base.iter().enumerate() {
+					for (m, MChunk) in Mega[i].into_chunks(MRM).base.iter().enumerate() {
+ 
+						Calculation = diffcomparison!(MChunk, KChunk, VChunk);
 
-					}
-				}
-			}
-		}
-	}
-
+						if Calculation <= threshold {
+							match BestMatch {
+								None => {
+									BestMatch = Some((i, ki, vi, m));
+								},
+								Some((i, ki, vi, m)) => {
+									UBM = BestMatch.unwrap();
+									BMCalculation = diffcomparison!(Mega[UBM.3], KeyChunks.base[UBM.1], ValueChunks.base[UBM.2]);
+									if Calculation < BMCalculation {
+										BestMatch = Some((i, ki, vi, m));
+									};
+								}
+							};
+						};
+					};
+				};
+			};
+		};
+	};
 }
